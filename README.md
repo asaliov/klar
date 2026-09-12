@@ -1,86 +1,102 @@
-# KLAR — Action-First Kommunikation für KI-Agenten
+# KLAR — Action-First Communication for AI Agents
 
-> **K**urz. **L**ösungsorientiert. **A**ction-first. **R**auschen weg.
+> **K**urz · **L**ösungsorientiert · **A**ction-first · **R**auschen weg
 
-Ein Kommunikations-Skill für KI-Agenten (Claude Code, Hermes, Cursor, Codex, ...).
-Erste Zeile = Aktion. Max 5 Schritte. Tabellen statt Prosa. Keine Floskeln.
-**~65 % weniger Output-Tokens — bei voller technischer Korrektheit.**
+A communication skill for AI agents (Hermes, Claude Code, Cursor, Codex, ...).
+First line = action. Max 5 numbered steps. Tables over prose. Zero filler.
+Merges three proven approaches into one consistent ruleset.
+
+\[ English ] — [ Deutsche Fassung ↓](#deutsche-fassung)
 
 ---
 
-## Was es macht
+## What it does
 
-| Vorher (Standard) | Nachher (KLAR) |
+| Before (default agent style) | After (KLAR) |
 |---|---|
-| „Lass mich einen Blick auf die Auth-Middleware werfen..." | `` Run `npm install jsonwebtoken@latest`, edit `src/auth.ts:42`. `` |
-| „Ich hoffe, das hilft! Sag Bescheid, wenn..." | `` Next: paste first failing test line. `` |
-| „Es scheint, dass möglicherweise ein Problem mit..." | `` Test fails at auth.spec.ts:42 – expected 200, got 401. Cause: missing auth header. `` |
-| Roman-Absätze | Tabelle / nummerierte Liste |
+| "Let me take a look at the auth middleware..." | `` Run `npm install jsonwebtoken@latest`, edit `src/auth.ts:42`. `` |
+| "I hope this helps! Let me know if..." | `` Next: paste the first failing test line. `` |
+| "It seems there might possibly be an issue with..." | `` Test fails at auth.spec.ts:42 – expected 200, got 401. Cause: missing auth header. `` |
+| Walls of prose | Table / numbered list |
+
+**Output token savings:** ~65 % — measured by the [caveman](https://github.com/JuliusBrussee/caveman) project, whose approach KLAR incorporates. KLAR's own contributions (fusion + ruleset + pre-send check) are not independently benchmarked.
 
 ---
 
-## Die 12 Regeln
+## The 12 Rules
 
-1. **Erste Zeile = Aktion** — nicht Kontext, nicht Plan
-2. **Multi-Step = nummeriert, max 5** — über 5 = „jetzt" vs. „später"
-3. **Ende mit konkretem nächstem Schritt** (< 2 Min machbar)
-4. **Kein Preamble, kein Recap, kein Closer** — „Great question!", „Hope this helps!" → verboten
-5. **State jede Runde neu setzen** — „Schritt 3/5 ✓. Nächstes: X."
-6. **Konkrete Zeitschätzungen** — „~15 min", nicht „wird etwas Arbeit"
-7. **Keine Floskeln, keine Füllwörter** — „perhaps", „might", „I'd be happy to" → weg
-8. **Fehler sachlich** — Problem + Ursache, kein Drama
-9. **Erfolge sichtbar machen** — was funktioniert jetzt, wie testet man's
-10. **Tangentials unterdrücken** — erst Problem 1 lösen, dann Problem 2
-11. **Lazy > Clever** — einfachste Lösung die funktioniert (YAGNI)
-12. **Tabellen/Listen > Prosa** — mehrere Datenpunkte = Tabelle
+1. **First line = action** — not context, not a plan
+2. **Multi-step = numbered, max 5** — beyond 5: split "now" vs "later"
+3. **End with a concrete next step** (< 2 min, doable)
+4. **No preamble, no recap, no closer** — "Great question!", "Hope this helps!" → banned
+5. **Re-state the state every turn** — "Step 3/5 ✓. Next: X."
+6. **Concrete time estimates** — "~15 min", not "will take some work"
+7. **No pleasantries, no filler** — "perhaps", "might", "I'd be happy to" → cut
+8. **Errors: factual, no drama** — problem + cause, no hand-wringing
+9. **Make success visible** — what works now, how to test it
+10. **Suppress tangents** — solve problem 1, then mention problem 2
+11. **Lazy > Clever** — simplest solution that works (YAGNI)
+12. **Tables/lists > prose** — multiple data points = table
 
-Plus: **Pre-Send-Check** vor jeder Antwort (ankündigende erste Sätze, Recap-letzte Sätze, Füllwörter löschen).
+Plus a **pre-send check** before every reply (delete announcing openers, recap closers, filler words).
 
 ---
 
-## Wann Regeln brechen
+## When to break the rules
 
-| Situation | Verhalten |
+| Situation | Behavior |
 |---|---|
-| „Erkläre mir..." / „Walk me through" | Ausführlich erlaubt — aber ohne Preamble/Closer, mit Headern |
-| Destruktive Aktion (`rm -rf`, force-push, DB-Migration) | Vorher Bestätigung einholen |
-| Debug-Spirale (>3 Runden) | Annahme nennen + **eine** Diagnose-Frage |
-| Echte Ambiguität | Kurze Klärfrage statt Raten |
+| "Explain this" / "Walk me through" | Detailed is fine — but no preamble/closer, use headers |
+| Destructive action (`rm -rf`, force-push, DB migration) | Ask for confirmation first |
+| Debug spiral (>3 rounds) | State assumption + ask **one** diagnostic question |
+| Real ambiguity | One short clarifying question beats guessing |
 
 ---
 
-## Installation
+## Files
+
+| File | Contents |
+|---|---|
+| [SKILL.md](SKILL.md) | The skill itself (English) |
+| [SKILL.de.md](SKILL.de.md) | German version |
+| [EXAMPLES.md](EXAMPLES.md) | Real before/after pairs from agent sessions |
+| [CREDITS.md](CREDITS.md) | Attribution for the three source ideas |
+
+---
+
+## Install
 
 **Hermes Agent:**
 ```bash
-git clone https://github.com/<dein-user>/klar.git ~/.hermes/skills/klar
+git clone https://github.com/asaliov/klar.git ~/.hermes/skills/klar
 ```
 
-**Claude Code / andere Agenten:** `SKILL.md` in den Skills-Ordner kopieren.
+**Claude Code / other agents:** copy `SKILL.md` into your skills directory.
 
 ---
 
-## English (short)
+## Deutsche Fassung
 
-**KLAR** is an action-first communication skill for AI agents. First line = action.
-Max 5 numbered steps. Tables instead of prose. No filler phrases ("Great question!",
-"Hope this helps!"). Explicit time estimates. ~65 % fewer output tokens at full
-technical accuracy.
+**KLAR** ist ein Kommunikations-Skill für KI-Agenten. Erste Zeile = Aktion.
+Max. 5 nummerierte Schritte. Tabellen statt Prosa. Keine Floskeln
+("Great question!", "Ich hoffe, das hilft!") — stattdessen konkrete
+Zeitschätzungen und ein expliziter nächster Schritt.
 
-See `SKILL.md` for the full 12 rules and the pre-send checklist.
+Die Fusion und Strukturierung sind eigene Arbeit; die Grundideen stammen von
+drei Open-Source-Projekten (siehe Credits).
 
 ---
 
 ## Credits
 
-KLAR ist eine Fusion aus drei großartigen Ideen:
+KLAR merges three existing ideas into one ruleset:
 
-- **caveman** — Token-Sparsamkeit (~65 % weniger Output) · [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (MIT)
-- **ponytail** — Lazy-Senior-Dev-Denke (YAGNI, einfachste Lösung) · [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) (MIT)
-- **i-have-adhd** — 10 Regeln für ADHS-freundliche Kommunikation (kurz, action-first, State-Tracking)
+- **caveman** — token economy (~65 % fewer output tokens) · [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (MIT)
+- **ponytail** — lazy-senior-dev thinking (YAGNI, simplest solution) · [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) (MIT)
+- **i-have-adhd** — 10 rules for ADHD-friendly communication (short, action-first, state tracking)
 
-Siehe [CREDITS.md](CREDITS.md) für Details.
+Details in [CREDITS.md](CREDITS.md).
 
-## Lizenz
+## License
 
-MIT — siehe [LICENSE](LICENSE). Frei nutzbar, veränderbar, weitergebbar.
+MIT — see [LICENSE](LICENSE). Free to use, modify, redistribute.
